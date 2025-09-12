@@ -1,0 +1,20 @@
+services:
+  backend:
+    build:
+      context: ./backend   # path to backend folder
+    container_name: mta_whisper_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/uploads:/app/uploads     # persist uploaded files
+      - ./backend/mta_whisper.db:/app/mta_whisper.db  # persist SQLite DB file
+
+  frontend:
+    image: thienlongtpct/mta-whisper-frontend
+    container_name: mta_whisper_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - backend

@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: white;
+}
+
+.container {
+  width: 41rem /* 656px */;
+  max-width: 95vw;
+}
+
+.btn-gradient-green {
+            background-image: linear-gradient(135deg, #27AE60, #127345);
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-gradient-green:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.6);
+        }
+
+        .hero-bg {
+            background: linear-gradient(to bottom, rgba(248, 249, 250, 0.9) 0%, rgba(248, 249, 250, 0.5) 100%), url('/IMG_2891.jpeg');
+            background-size: cover;
+            background-position: center;
+            /* height: 90vh; */
+        }
+
+        .login-card {
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Nút đăng nhập Google */
+        .google-btn {
+            transition: all 0.3s ease;
+        }
+
+        .google-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .main-card {
+            background-color: #FFFFFF;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .tab-btn.active {
+            background-color: #10B981;
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+        .tab-btn.active svg {
+            color: #FFFFFF;
+        }
+        .tab-btn:not(.active):hover {
+            background-color: #F9FAFB;
+        }
+        .history-item {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .history-item:hover {
+            background-color: #f1f5f9;
+        }
+        .login-card {
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.9);
+        }

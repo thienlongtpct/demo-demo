@@ -1,0 +1,29 @@
+{
+  "name": "MTA-Whisper",
+  "short_name": "MTA-Whisper",
+  "icons": [
+    {
+      "src": "/icons/MTA.svg",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "svg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/MTA.svg",
+      "sizes": "192x192",
+      "type": "svg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/MTA.svg",
+      "sizes": "512x512",
+      "type": "svg",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#a0a0a0",
+  "background_color": "#151515"
+}
