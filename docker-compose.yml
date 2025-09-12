@@ -10,7 +10,8 @@ services:
       - ./backend/mta_whisper.db:/app/mta_whisper.db  # persist SQLite DB file
 
   frontend:
-    image: thienlongtpct/mta-whisper-frontend
+    build:
+      context: ./frontend
     container_name: mta_whisper_frontend
     ports:
       - "3000:3000"
