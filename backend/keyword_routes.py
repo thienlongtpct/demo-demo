@@ -25,7 +25,16 @@ def get_current_user(token: str, db: Session):
         raise HTTPException(401, "Token không hợp lệ")
 
 
-@router.post("/add")
+@router.post(
+    "/add",
+    summary="Thêm từ khóa cần highlight",
+    description="""
+Người dùng thêm từ khóa để highlight.
+
+- Nếu user là **admin** → từ khóa dạng *admin keyword* (áp dụng cho tất cả).
+- Nếu user là **normal** → từ khóa dạng *custom keyword* (chỉ dành riêng user đó).
+""",
+)
 def add_keyword(word: str, token: str, db: Session = Depends(get_db)):
     user = get_current_user(token, db)
 
@@ -41,7 +50,16 @@ def add_keyword(word: str, token: str, db: Session = Depends(get_db)):
     return {"msg": "Thêm từ khóa thành công", "id": keyword.id}
 
 
-@router.get("/")
+@router.get(
+    "/",
+    summary="Lấy danh sách từ khóa highlight",
+    description="""
+Trả về danh sách từ khóa highlight bao gồm:
+- **admin_keywords**: từ khóa chung do admin đặt.
+- **user_keywords**: từ khóa riêng của user.
+- **all_keywords**: tập hợp cả hai loại.
+""",
+)
 def list_keywords(token: str, db: Session = Depends(get_db)):
     user = get_current_user(token, db)
 
@@ -56,7 +74,19 @@ def list_keywords(token: str, db: Session = Depends(get_db)):
     }
 
 
-@router.delete("/{keyword_id}")
+@router.delete(
+    "/{keyword_id}",
+    summary="Xóa từ khóa",
+    description="""
+Xóa một từ khóa highlight.
+
+- **Admin** có quyền xóa tất cả từ khóa (cả admin và user).
+- **User** chỉ có thể xóa từ khóa do chính mình tạo.
+
+Nếu từ khóa không tồn tại → trả về lỗi 404.
+Nếu user không có quyền → trả về lỗi 403.
+""",
+)
 def delete_keyword(keyword_id: int, token: str, db: Session = Depends(get_db)):
     user = get_current_user(token, db)
     keyword = db.query(Keyword).filter(Keyword.id == keyword_id).first()

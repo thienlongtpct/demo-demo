@@ -2,12 +2,11 @@ import datetime
 import re
 
 import jwt
+from database import SessionLocal
 from fastapi import APIRouter, Depends, HTTPException
+from models import User
 from passlib.hash import bcrypt
 from sqlalchemy.orm import Session
-
-from database import SessionLocal
-from models import User
 
 SECRET_KEY = "mta-whisper"
 router = APIRouter(prefix="/auth")
@@ -72,7 +71,21 @@ def validate_phone(phone: str):
 # ==========================
 
 
-@router.post("/register")
+@router.post(
+    "/register",
+    summary="Đăng ký tài khoản mới",
+    description="""
+Tạo một tài khoản người dùng mới.
+
+Yêu cầu:
+- **username**: 3–20 ký tự, chỉ cho phép chữ cái, số, dấu `.` `_` `-`.
+- **password**: ít nhất 8 ký tự, bao gồm cả chữ và số.
+- **email**: định dạng hợp lệ, duy nhất.
+- **phone_number**: 7–15 chữ số, có thể có dấu +.
+
+Người dùng mới mặc định có vai trò **normal user**. 
+""",
+)
 def register(
     username: str,
     password: str,
@@ -110,7 +123,15 @@ def register(
     return {"msg": "Đăng ký tài khoản thành công"}
 
 
-@router.post("/login")
+@router.post(
+    "/login",
+    summary="Đăng nhập hệ thống",
+    description="""
+Đăng nhập bằng **username hoặc email** cùng với mật khẩu.
+
+Trả về JWT token dùng để xác thực ở các API khác.
+""",
+)
 def login(identifier: str, password: str, db: Session = Depends(get_db)):
     """
     identifier = username hoặc email

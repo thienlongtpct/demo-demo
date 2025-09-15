@@ -4,3 +4,6 @@ sqlalchemy==2.0.35
 passlib[bcrypt]==1.7.4
 pyjwt==2.9.0
 python-multipart==0.0.9
+transformers==4.44.2
+torch>=2.7,<3.0
+openai-whisper==20231117
